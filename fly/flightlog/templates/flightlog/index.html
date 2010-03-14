@@ -1,0 +1,9 @@
+{% if latest_flights_list %}
+    <ul>
+    {% for flight in latest_flights_list %}
+        <li><a href="/flights/{{ flight.id }}/">{{ flight.takeoff }} to {{ flight.landing }}</a></li>
+    {% endfor %}
+    </ul>
+{% else %}
+    <p>No flights are available.</p>
+{% endif %}
