@@ -9,6 +9,7 @@ urlpatterns = patterns('',
     # (r'^fly/', include('fly.foo.urls')),
     (r'^flights/$', 'fly.flightlog.views.index'),
     (r'^flights/(?P<flight_id>\d+)/$', 'fly.flightlog.views.detail'),
+    (r'^wing/new/$', 'fly.flightlog.views.newwing'),
 
     # Uncomment the admin/doc line below and add 'django.contrib.admindocs' 
     # to INSTALLED_APPS to enable admin documentation:
