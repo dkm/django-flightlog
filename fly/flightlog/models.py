@@ -25,3 +25,6 @@ class Flight(models.Model):
     
     def __unicode__(self):
         return "%s -> %s" %(self.takeoff, self.landing)
+
+    def get_absolute_url(self):
+        return "/flights/%i/" % self.id
