@@ -1,0 +1,10 @@
+<h1>{{ flight }}</h1>
+<ul>
+  <li>{{ flight.date }}</li>
+  <li>Duration : {{ flight.duration }}</li>
+  <li>Takeoff: {{ flight.takeoff }}</li>
+  <li>Landing: {{ flight.landing }}</li>
+  <li>Wing: {{ flight.wing }}</li>
+  <li>Distance: {{ flight.distance }}</li>
+</ul>
+<a href="/flights/edit/{{flight.id}}">[edit]</a><a href="/flights">[list]</a>

@@ -27,4 +27,4 @@ class Flight(models.Model):
         return "%s -> %s" %(self.takeoff, self.landing)
 
     def get_absolute_url(self):
-        return "/flights/%i/" % self.id
+        return "/flights/view/%i/" % self.id

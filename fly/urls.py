@@ -13,16 +13,17 @@ wing_info = {
 
 flight_info = {
     "queryset" : Flight.objects.all(),
+    "template_object_name" : "flight",
 }
 
 urlpatterns = patterns('',
     (r'^wing/$', list_detail.object_list, wing_info),
-    (r'^flights/$', list_detail.object_list, flight_info),
 
-    # (r'^fly/', include('fly.foo.urls')),
-    (r'^flights/$', 'fly.flightlog.views.index'),
+    (r'^flights/$', list_detail.object_list, flight_info),
     (r'^flights/new$', create_update.create_object, {'model': Flight}),
-    (r'^flights/(?P<flight_id>\d+)/$', 'fly.flightlog.views.detail'),
+    (r'^flights/view/(?P<object_id>\d+)/$', list_detail.object_detail, flight_info),
+    (r'^flights/edit/(?P<object_id>\d+)/$', create_update.update_object, {'model': Flight}),
+
     (r'^wing/new/$', 'fly.flightlog.views.newwing'),
     (r'^flight/new/$', 'fly.flightlog.views.newflight'),
 
