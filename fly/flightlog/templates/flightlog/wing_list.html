@@ -1,8 +1,13 @@
+{% extends "flightlog/base.html" %}
+
+{% block title %}Wings list{% endblock %}
+
 {% block content %}
-    <h2>Wings</h2>
-    <ul>
-        {% for wing in object_list %}
-            <li>{{ wing.name }} ( {{wing.purchase_date}} )</li>
-        {% endfor %}
-    </ul>
+<h2>Wings</h2>
+<ul>
+  {% for wing in wing_list %}
+  <li><a href="/wing/view/{{wing.id}}">{{ wing.name }} ( {{wing.purchase_date}}
+  )</a> <a href="/wing/edit/{{wing.id}}">[edit]</a><a href="/wing/del/{{wing.id}}">[del]</a></li>
+  {% endfor %}
+</ul>
 {% endblock %}

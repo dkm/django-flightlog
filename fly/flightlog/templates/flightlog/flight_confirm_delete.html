@@ -1,7 +1,7 @@
 {% extends "flightlog/base.html" %}
 {% block title %}Flight details for {{ flight }} {% endblock %}
 {% block content %}
-{{ flight }}:
+Delete the flight: {{ flight }}:
 <ul>
   <li>{{ flight.date }}</li>
   <li>Duration : {{ flight.duration }}</li>
@@ -10,5 +10,9 @@
   <li>Wing: {{ flight.wing }}</li>
   <li>Distance: {{ flight.distance }}</li>
 </ul>
-<a href="/flight/edit/{{flight.id}}">[edit]</a><a href="/flight/del/{{flight.id}}">[del]</a>
+<form method="post" action=".">
+<p>Are you sure?</p>
+<input type="submit" />
+</form>
+<a href="/flight/edit/{{flight.id}}">[edit]</a>
 {% endblock %}

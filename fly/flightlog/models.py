@@ -7,13 +7,25 @@ class Wing(models.Model):
     purchase_date = models.DateTimeField('date of purchase')
 
     def __unicode__(self):
-        return self.name
+        return u"%s" % self.name
+
+    def get_absolute_url(self):
+        return "/wing/view/%i/" % self.id
 
 class Location(models.Model):
     name = models.CharField(max_length=200)
-    
+    TYPE_CHOICES = (
+        ('T', 'Take-Off'),
+        ('L', 'Landing'),
+        ('B', 'Take-off & Landing'),
+    )
+    ltype = models.CharField(max_length=1, choices=TYPE_CHOICES)
+
     def __unicode__(self):
-        return self.name
+        return u"%s (%s)" %(self.name, self.ltype)
+
+    def get_absolute_url(self):
+        return "/location/view/%i/" % self.id
 
 class Flight(models.Model):
     date = models.DateTimeField()
@@ -27,4 +39,4 @@ class Flight(models.Model):
         return "%s -> %s" %(self.takeoff, self.landing)
 
     def get_absolute_url(self):
-        return "/flights/view/%i/" % self.id
+        return "/flight/view/%i/" % self.id

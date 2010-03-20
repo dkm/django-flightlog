@@ -1,9 +1,17 @@
+{% extends "flightlog/base.html" %}
+
+{% block title %}Flights list {% endblock %}
+
 {% block content %}
     <h2>Flights</h2>
     <ul>
         {% for flight in flight_list %}
-            <li><a href="/flights/view/{{flight.id}}">{{ flight.date }}, {{ flight.duration }}, {{flight.takeoff}},
-    {{flight.landing}}, {{flight.wing}}, {{flight.distance}}</a> <a href="/flights/edit/{{flight.id}}">[edit]</a></li>
+            <li><a href="/flight/view/{{flight.id}}">{{ flight.date }}, {{ flight.duration }}, {{flight.takeoff}},
+    {{flight.landing}}, {{flight.wing}}, {{flight.distance}}</a> <a
+    href="/flight/edit/{{flight.id}}">[edit]</a>
+<a
+    href="/flight/del/{{flight.id}}">[del]</a>
+      </li>
         {% endfor %}
     </ul>
 {% endblock %}

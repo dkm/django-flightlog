@@ -1,0 +1,12 @@
+{% extends "flightlog/base.html" %}
+
+{% block title %}Location list {% endblock %}
+
+{% block content %}
+    <h2>Locations</h2>
+    <ul>
+        {% for location in location_list %}
+            <li><a href="/location/view/{{location.id}}">{{ location }}</a> <a href="/location/edit/{{location.id}}">[edit]</a> <a href="/location/del/{{location.id}}">[del]</a></li>
+        {% endfor %}
+    </ul>
+{% endblock %}

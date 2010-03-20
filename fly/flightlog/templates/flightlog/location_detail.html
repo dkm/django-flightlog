@@ -1,0 +1,6 @@
+{% extends "flightlog/base.html" %}
+{% block title %}Location details for {{ location }} {% endblock %}
+{% block content %}
+{{ location }}
+<a href="/location/edit/{{location.id}}">[edit]</a><a href="/location/del/{{location.id}}">[del]</a>
+{% endblock %}

@@ -1,0 +1,11 @@
+{% extends "flightlog/base.html" %}
+{% block title %}Location deletion {{ location }} {% endblock %}
+{% block content %}
+Delete the location: {{ location }} ?
+
+<form method="post" action=".">
+<p>Are you sure?</p>
+<input type="submit" />
+</form>
+<a href="/location/edit/{{location.id}}">[edit]</a>
+{% endblock %}

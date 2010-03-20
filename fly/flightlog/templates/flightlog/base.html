@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="ISO-8859-1"?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN"
+"http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr"
+lang="fr">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>{% block title %}Kataplop{% endblock %} </title>
+
+</head>
+<body>
+<div id="header">{% block header %}This is a generic header {% endblock %}</div>
+<div id="content">
+{% block content %}
+{% endblock %}
+</div><!-- content -->
+
+<div id="bottom-control">
+  <ul>
+    <li><a href="/flight/">[list flights]</a></li>
+    <li><a href="/flight/new">[add flight]</a></li>
+  </ul>
+  <ul>
+    <li><a href="/wing/">[list wings]</a></li>
+    <li><a href="/wing/new">[add wing]</a></li>
+  </ul>
+  <ul>
+    <li><a href="/location/">[list locations]</a></li>
+    <li><a href="/location/new">[add location]</a></li>
+  </ul>    
+</div>
+</body>
+</html>
