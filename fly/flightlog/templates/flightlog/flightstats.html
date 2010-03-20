@@ -1,0 +1,17 @@
+{% extends "flightlog/base.html" %}
+
+{% block title %}Flights stats {% endblock %}
+
+{% block content %}
+    <h2>Flights statistics {% if year %}for {{year}}{% endif %}</h2>
+{% ifequal total_flights 0 %}
+No flight, no stats ;)
+{% else %}
+<ul>
+  <li>Total flights:  {{total_flights}}</li>
+  <li>Total distance: {{total_distance}}km</li>
+  <li>Average distance per flight: {{avg_dist_per_flight}}km</li>
+</ul>
+{% endifequal %}
+
+{% endblock %}

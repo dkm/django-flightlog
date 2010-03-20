@@ -12,6 +12,8 @@
 <a
     href="/flight/del/{{flight.id}}">[del]</a>
       </li>
-        {% endfor %}
+      {% empty %}
+      No flights...
+      {% endfor %}
     </ul>
 {% endblock %}

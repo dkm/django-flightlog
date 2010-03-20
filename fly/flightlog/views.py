@@ -11,10 +11,6 @@ class FlightForm(ModelForm):
     class Meta:
         model = Flight
 
-def index(request):
-    latest_flights_list = Flight.objects.all().order_by('-date')[:5]
-    return render_to_response('flightlog/index.html', {'latest_flights_list': latest_flights_list})
-
 
 
 def newflight(request):
@@ -33,24 +29,28 @@ def newflight(request):
             })
 
 
-def newwing(request):
-    if request.method == 'POST':
-        form = WingForm(request.POST)
-        if form.is_valid():
-            w = Wing(name=form.cleaned_data['name'],
-                     purchase_date=form.cleaned_data['purchase_date'])
-            w.save()
-            return HttpResponseRedirect('/')
+
+def flightstats(request, year=None):
+    if year != None:
+        queryset = Flight.objects.filter(date__year=year)
     else:
-        form = WingForm() # An unbound form
+        queryset = Flight.objects.all()
 
-    return render_to_response('flightlog/newwing.html', {
-            'form': form,
-            })
+    l = len(queryset)
 
+    dist = 0
 
-def detail(request, flight_id):
-    f = get_object_or_404(Flight, pk=flight_id)
+    for f in queryset:
+        dist += f.distance
 
-    return render_to_response('flightlog/detail.html', {'flight': f})
+    if l == 0:
+        avg_dist_per_flight = None
+    else:
+        avg_dist_per_flight = dist/len(queryset)
+        
+    return render_to_response('flightlog/flightstats.html', {"flight_list": queryset,
+                                                             'total_distance' : dist,
+                                                             'total_flights' : len(queryset),
+                                                             'avg_dist_per_flight' : avg_dist_per_flight,
+                                                             'year': year})
 
