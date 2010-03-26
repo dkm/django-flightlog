@@ -6,4 +6,16 @@
 {{wing}}
 {{ location }}
 <a href="/wing/edit/{{wing.id}}">[edit]</a><a href="/wing/del/{{wing.id}}">[del]</a>
+
+<p>
+5 last flights with this wing:
+<ul>
+  {% for flight in flights %}
+   <li><a href="/flight/view/{{flight.id}}">{{flight}}</a></li>
+  {% empty %}
+ <li>None...</li>
+  {% endfor %}
+</ul>
+</p>
 {% endblock %}
+

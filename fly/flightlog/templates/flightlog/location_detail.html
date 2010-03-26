@@ -3,4 +3,22 @@
 {% block content %}
 {{ location }}
 <a href="/location/edit/{{location.id}}">[edit]</a><a href="/location/del/{{location.id}}">[del]</a>
+<p>
+5 Last flights starting from here:
+<ul>
+  {% for flight in takeoff %}
+   <li><a href="/flight/view/{{flight.id}}">{{flight}}</a></li>
+  {% empty %}
+ <li>None...</li>
+  {% endfor %}
+</ul>
+5 last flights ending here:
+<ul>
+  {% for flight in landing %}
+   <li><a href="/flight/view/{{flight.id}}">{{flight}}</a></li>
+  {% empty %}
+ <li>None...</li>
+  {% endfor %}
+</ul>
+</p>
 {% endblock %}

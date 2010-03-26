@@ -8,6 +8,8 @@
   {% for wing in wing_list %}
   <li><a href="/wing/view/{{wing.id}}">{{ wing.name }} ( {{wing.purchase_date}}
   )</a> <a href="/wing/edit/{{wing.id}}">[edit]</a><a href="/wing/del/{{wing.id}}">[del]</a></li>
+  {% empty %}
+      No wings...
   {% endfor %}
 </ul>
 {% endblock %}

@@ -7,6 +7,8 @@
     <ul>
         {% for location in location_list %}
             <li><a href="/location/view/{{location.id}}">{{ location }}</a> <a href="/location/edit/{{location.id}}">[edit]</a> <a href="/location/del/{{location.id}}">[del]</a></li>
+        {% empty %}
+	    No Location...
         {% endfor %}
     </ul>
 {% endblock %}

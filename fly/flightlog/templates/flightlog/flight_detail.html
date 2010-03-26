@@ -5,9 +5,9 @@
 <ul>
   <li>{{ flight.date }}</li>
   <li>Duration : {{ flight.duration }}</li>
-  <li>Takeoff: {{ flight.takeoff }}</li>
-  <li>Landing: {{ flight.landing }}</li>
-  <li>Wing: {{ flight.wing }}</li>
+  <li>Takeoff: <a href="/location/view/{{flight.takeoff.id}}">{{ flight.takeoff }}<a></li>
+  <li>Landing: <a href="/location/view/{{flight.landing.id}}">{{ flight.landing }}</a></li>
+  <li>Wing: <a href="/wing/view/{{flight.wing.id}}">{{ flight.wing }}</a></li>
   <li>Distance: {{ flight.distance }}</li>
 </ul>
 <a href="/flight/edit/{{flight.id}}">[edit]</a><a href="/flight/del/{{flight.id}}">[del]</a>
