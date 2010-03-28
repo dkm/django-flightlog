@@ -1,5 +1,5 @@
-from django.db import models
-
+##from django.db import models
+from django.contrib.gis.db import models
 # Create your models here.
 
 class Wing(models.Model):
@@ -20,6 +20,8 @@ class Location(models.Model):
         ('B', 'Take-off & Landing'),
     )
     ltype = models.CharField(max_length=1, choices=TYPE_CHOICES)
+    coord = models.PointField()
+    objects = models.GeoManager()
 
     def __unicode__(self):
         return u"%s (%s)" %(self.name, self.ltype)
