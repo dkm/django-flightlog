@@ -2,9 +2,15 @@ from django.conf.urls.defaults import *
 from fly.flightlog.models import Flight, Wing, Location
 from django.views.generic import list_detail,create_update
 
+from django.contrib import databrowse
+
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
+
+databrowse.site.register(Location)
+databrowse.site.register(Wing)
+databrowse.site.register(Flight)
 
 wing_info = {
     "queryset" : Wing.objects.all(),
@@ -41,6 +47,7 @@ urlpatterns = patterns('',
     (r'^wing/del/(?P<object_id>\d+)/$', create_update.delete_object, {'model': Wing,
                                                                       'post_delete_redirect': '/wing',
                                                                       'template_object_name' : 'wing'}),
+    (r'^databrowse/(.*)', databrowse.site.root),
     (r'^location/$', list_detail.object_list, location_info),
     (r'^location/new$', create_update.create_object, {'model': Location}),
 #    (r'^location/view/(?P<object_id>\d+)/$', list_detail.object_detail, location_info),
