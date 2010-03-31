@@ -1,16 +1,15 @@
 from django.conf.urls.defaults import *
 from fly.flightlog.models import Flight, Wing, Location
 from django.views.generic import list_detail,create_update
-
+from django.forms import ModelForm
+from olwidget.widgets import EditableMap
 from django.contrib import databrowse
+
+import settings
 
 # Uncomment the next two lines to enable the admin:
 from django.contrib import admin
 admin.autodiscover()
-
-databrowse.site.register(Location)
-databrowse.site.register(Wing)
-databrowse.site.register(Flight)
 
 wing_info = {
     "queryset" : Wing.objects.all(),
@@ -26,7 +25,7 @@ location_info = {
     "queryset" : Location.objects.all(),
     "template_object_name" : "location",
 }
-
+        
 urlpatterns = patterns('',
 
 
@@ -49,7 +48,7 @@ urlpatterns = patterns('',
                                                                       'template_object_name' : 'wing'}),
     (r'^databrowse/(.*)', databrowse.site.root),
     (r'^location/$', list_detail.object_list, location_info),
-    (r'^location/new$', create_update.create_object, {'model': Location}),
+    (r'^location/new$', "fly.flightlog.views.create_location"),
 #    (r'^location/view/(?P<object_id>\d+)/$', list_detail.object_detail, location_info),
     (r'^location/view/(?P<location_id>\d+)/$', "fly.flightlog.views.location_detail"),
     (r'^location/edit/(?P<object_id>\d+)/$', create_update.update_object, {'model': Location}),
@@ -62,4 +61,6 @@ urlpatterns = patterns('',
     
     # Uncomment the next line to enable the admin:
     (r'^admin/', include(admin.site.urls)),
+    (r'^umedia/(?P<path>.*)$', 'django.views.static.serve',
+     {'document_root': settings.MEDIA_ROOT}),
 )

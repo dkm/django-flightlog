@@ -2,16 +2,25 @@ from django.http import HttpResponse, HttpResponseRedirect
 from fly.flightlog.models import Flight, Wing, Location
 from django.shortcuts import render_to_response, get_object_or_404
 from django.forms import ModelForm
+from django import forms
 
-from django.views.generic import list_detail
+from django.views.generic import list_detail,create_update
 
-class WingForm(ModelForm):
+from olwidget.widgets import MapDisplay,EditableMap
+
+class LocationForm(ModelForm):
+    coord = forms.CharField(widget=EditableMap(options={
+                'hide_textarea': False,
+                }))
     class Meta:
-        model = Wing
+        model = Location
 
-class FlightForm(ModelForm):
-    class Meta:
-        model = Flight
+def create_location(request):
+    return create_update.create_object(
+        request,
+        form_class=LocationForm,
+        )
+
 
 def wing_detail(request, wing_id):
     flights = Flight.objects.filter(wing__exact=wing_id)[:5]
@@ -28,6 +37,8 @@ def location_detail(request, location_id):
     takeoff = Flight.objects.filter(takeoff__exact=location_id)[:5]
     landing = Flight.objects.filter(landing__exact=location_id)[:5]
 
+    the_map = MapDisplay(fields=[Location.objects.get(pk=location_id).coord])
+
     # Use the object_list view for the heavy lifting.
     return list_detail.object_detail(
         request,
@@ -36,7 +47,8 @@ def location_detail(request, location_id):
         template_object_name = "location",
         template_name = "flightlog/location_detail.html",
         extra_context = {"takeoff" : takeoff,
-                         "landing" : landing}
+                         "landing" : landing,
+                         "map": the_map}
     )
 
 

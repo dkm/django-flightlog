@@ -1,5 +1,7 @@
 {% extends "flightlog/base.html" %}
-{% block title %}Location info edition {% endblock %}
+{% block extrahead %} {{ form.media }} {% endblock %}
+
+{% block title %}Location info [toto] edition {% endblock %}
 {% block content %}
 
 <form action="" method="post">
