@@ -3,23 +3,34 @@ from fly.flightlog.models import Flight, Wing, Location
 from django.shortcuts import render_to_response, get_object_or_404
 from django.forms import ModelForm
 from django import forms
+from django.template import RequestContext
 
 from django.views.generic import list_detail,create_update
 
 from olwidget.widgets import MapDisplay,EditableMap
 
+OL_LAYERS= ['osm.mapnik', 
+            'osm.osmarender', 
+            'google.streets', 
+            'google.physical', 
+            'google.satellite', 
+            'google.hybrid', 
+            've.road', 
+            've.shaded', 
+            've.aerial', 
+            've.hybrid', 
+            'wms.map', 
+##            'wms.nasa', 
+            'yahoo.map']
+
 class LocationForm(ModelForm):
     coord = forms.CharField(widget=EditableMap(options={
-                'hide_textarea': False,
+                'hide_textarea': True,
+                'default_zoom': 10,
+                'layers' : OL_LAYERS
                 }))
     class Meta:
         model = Location
-
-def create_location(request):
-    return create_update.create_object(
-        request,
-        form_class=LocationForm,
-        )
 
 
 def wing_detail(request, wing_id):
@@ -33,11 +44,42 @@ def wing_detail(request, wing_id):
         extra_context = {"flights" : flights}
     )
 
+def create_location(request):
+    return create_update.create_object(
+        request,
+        form_class=LocationForm,
+        )
+
+def location_update(request, location_id=None):
+    Form = LocationForm
+
+    if location_id:
+        instance = Form.Meta.model.objects.get(pk=location_id)
+    else:
+        instance = Form.Meta.model()
+ 
+    if request.method == 'POST':
+        form = Form(request.POST, instance=instance)
+        try:
+            model = form.save()
+            return HttpResponseRedirect(model.get_absolute_url())
+        except ValueError:
+            pass
+    else:
+        form = Form(instance=instance)
+ 
+    return render_to_response("flightlog/location_form.html",
+            {'form': form},
+            RequestContext(request))
+
+
 def location_detail(request, location_id):
     takeoff = Flight.objects.filter(takeoff__exact=location_id)[:5]
     landing = Flight.objects.filter(landing__exact=location_id)[:5]
 
-    the_map = MapDisplay(fields=[Location.objects.get(pk=location_id).coord])
+    the_map = MapDisplay(fields=[Location.objects.get(pk=location_id).coord],options={
+            'hide_textarea': True,
+            } )
 
     # Use the object_list view for the heavy lifting.
     return list_detail.object_detail(
