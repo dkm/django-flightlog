@@ -1,0 +1,21 @@
+Web Design
+----------
+
+- add a js wiget for selecting dates (defaulting to 'today' 12h00)
+
+Structure
+---------
+
+
+Models
+------
+- add igc2kmz
+- attach track to a flight (maybe cache something)
+
+
+Features
+--------
+
+- compute CFD points
+- automatic/guided upload to CFD
+
