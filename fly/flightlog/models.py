@@ -36,7 +36,10 @@ class Flight(models.Model):
     landing = models.ForeignKey(Location, related_name="landing")
     wing = models.ForeignKey(Wing)
     distance = models.PositiveIntegerField()
-    
+    track = models.LineStringField()
+
+    objects = models.GeoManager()
+
     def __unicode__(self):
         return "%s -> %s" %(self.takeoff, self.landing)
 

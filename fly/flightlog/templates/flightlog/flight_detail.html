@@ -1,4 +1,8 @@
 {% extends "flightlog/base.html" %}
+{% block extrahead %}
+{{map.media}}
+{% endblock %}
+
 {% block title %}Flight details for {{ flight }} {% endblock %}
 {% block content %}
 {{ flight }}:
@@ -10,5 +14,16 @@
   <li>Wing: <a href="/wing/view/{{flight.wing.id}}">{{ flight.wing }}</a></li>
   <li>Distance: {{ flight.distance }}</li>
 </ul>
+
+
+<table>
+  <tr>
+    <td>Geographic location:</td>
+    <td>
+      {{map}}
+    </td>
+  </tr>
+</table>
+
 <a href="/flight/edit/{{flight.id}}">[edit]</a><a href="/flight/del/{{flight.id}}">[del]</a>
 {% endblock %}
