@@ -4,9 +4,21 @@
 <html xmlns="http://www.w3.org/1999/xhtml" xml:lang="fr"
 lang="fr">
 <head>
+
+<link type="text/css" href="{{ MEDIA_URL }}/css/ui-lightness/jquery-ui-1.8.custom.css" rel="Stylesheet" />	
+<script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery-1.4.2.min.js"></script>
+<script type="text/javascript" src="{{ MEDIA_URL }}/js/jquery-ui-1.8.custom.min.js"></script>
+
 {% block extrahead %}{% endblock %}
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
 <title>{% block title %}Kataplop{% endblock %} </title>
+
+
+<script type="text/javascript">
+	$(function() {
+		$("#bottom-control").accordion();
+	});
+	</script>
 
 </head>
 <body>
@@ -17,19 +29,32 @@ lang="fr">
 </div><!-- content -->
 
 <div id="bottom-control">
-  <ul>
-    <li><a href="/flight/">[list flights]</a></li>
-    <li><a href="/flight/new">[add flight]</a></li>
-        <li><a href="/flight/stats">[stats flights]</a></li>
-  </ul>
-  <ul>
-    <li><a href="/wing/">[list wings]</a></li>
-    <li><a href="/wing/new">[add wing]</a></li>
-  </ul>
-  <ul>
-    <li><a href="/location/">[list locations]</a></li>
-    <li><a href="/location/new">[add location]</a></li>
-  </ul>    
+
+  <h3><a href="#">Flights</a></h3>
+  <div>
+    <ul>
+      <li><a href="/flight/">[list flights]</a></li>
+      <li><a href="/flight/new">[add flight]</a></li>
+      <li><a href="/flight/stats">[stats flights]</a></li>
+    </ul>
+  </div>
+
+
+  <h3><a href="#">Wings</a></h3>
+  <div>
+    <ul>
+      <li><a href="/wing/">[list wings]</a></li>
+      <li><a href="/wing/new">[add wing]</a></li>
+    </ul>
+  </div>
+  
+  <h3><a href="#">Locations</a></h3>
+  <div>
+    <ul>
+      <li><a href="/location/">[list locations]</a></li>
+      <li><a href="/location/new">[add location]</a></li>
+    </ul>
+  </div>
 </div>
 </body>
 </html>
